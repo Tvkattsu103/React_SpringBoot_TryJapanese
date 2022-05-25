@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.tuanvo.spring.entities.WordTopic;
+import com.tuanvo.spring.entity.WordTopic;
 
 @Repository
 public interface WordTopicRepository extends JpaRepository<WordTopic, Long>{

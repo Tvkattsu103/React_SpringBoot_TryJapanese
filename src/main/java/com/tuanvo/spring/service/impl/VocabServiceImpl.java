@@ -3,10 +3,12 @@ package com.tuanvo.spring.service.impl;
 import java.util.Collection;
 import java.util.Optional;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tuanvo.spring.entities.Vocab;
+import com.tuanvo.spring.entity.Vocab;
 import com.tuanvo.spring.repository.VocabRepository;
 import com.tuanvo.spring.service.IVocabService;
 
@@ -24,10 +26,10 @@ public class VocabServiceImpl implements IVocabService<Vocab>{
 	public Optional<Vocab> findById(Long id) {
 		return vocabRepository.findById(id);
 	}
-
+	
 	@Override
 	public Vocab saveOrUpdate(Vocab vocab) {
-		return vocabRepository.save(vocab);
+		return vocabRepository.saveAndFlush(vocab);
 	}
 
 	@Override
@@ -35,4 +37,15 @@ public class VocabServiceImpl implements IVocabService<Vocab>{
 		return vocabRepository.findAllByWordID(Long.parseLong(wordID));
 	}
 
+	@Override
+	public String deleteById(Long id) {
+		JSONObject jsonObject = new JSONObject();
+		try {
+			vocabRepository.deleteById(id);
+			jsonObject.put("message", "Vocab deleted successfully");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return jsonObject.toString();
+	}
 }

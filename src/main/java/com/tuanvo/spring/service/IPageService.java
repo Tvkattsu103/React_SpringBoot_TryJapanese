@@ -7,4 +7,7 @@ public interface IPageService<T> {
 	Page<T> findAll(Pageable pageable, String searchText);
 
 	Page<T> findAll(Pageable pageable);
+	
+	Page<T> findWithTopic(Pageable pageable, Long topicID);
+	
 }

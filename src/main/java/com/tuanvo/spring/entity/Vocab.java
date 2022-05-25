@@ -1,4 +1,4 @@
-package com.tuanvo.spring.entities;
+package com.tuanvo.spring.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

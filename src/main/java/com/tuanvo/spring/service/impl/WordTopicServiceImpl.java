@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tuanvo.spring.entities.WordTopic;
+import com.tuanvo.spring.entity.WordTopic;
 import com.tuanvo.spring.repository.WordTopicRepository;
 import com.tuanvo.spring.service.IWordTopicService;
 
@@ -39,6 +41,18 @@ public class WordTopicServiceImpl implements IWordTopicService<WordTopic>{
 	@Override
 	public ArrayList<WordTopic> findAll(String searchText) {
 		return wordTopicRepository.findAllWords(searchText);
+	}
+
+	@Override
+	public String deleteById(Long id) {
+		JSONObject jsonObject = new JSONObject();
+		try {
+			wordTopicRepository.deleteById(id);
+			jsonObject.put("message", "User deleted successfully");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return jsonObject.toString();
 	}
 
 }
